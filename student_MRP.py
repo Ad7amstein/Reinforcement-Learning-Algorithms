@@ -18,7 +18,7 @@ def get_value(state, returns):
     val = np.average(returns_np)
     return (state, val)
 
-samples = [
+episodes = [
     ["C1", "C2", "C3", "Pass", "Sleep"],
     ["C1", "FB", "FB", "C1", "C2", "Sleep"],
     ["C1", "C2", "C3", "Pub", "C2", "C3", "Pass", "Sleep"],
@@ -36,6 +36,6 @@ reward = {
     "Pub": 1
 }
 
-for s in samples:
-    sample_return = get_return(sample=s)
-    print(f"{s}: {round(sample_return, 3)}")
+for eps in episodes:
+    sample_return = get_return(sample=eps)
+    print(f"{eps}: {round(sample_return, 3)}")
