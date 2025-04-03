@@ -33,7 +33,7 @@ state_values = np.array([-17.00, -7.00, 0.00, -7.00, -12.00, -27.00])
 def main():
     """Main Program"""
     episode_returns, state_returns = get_returns(episode, state_rewards)
-    print(f"Return per state: {np.round(episode_returns, 2)}")
+    print(f"Episode Return: {np.round(episode_returns, 2)}")
 
     for state in range(0, 6):
         state_values[state] = update_state_value(state, state_values, state_returns)

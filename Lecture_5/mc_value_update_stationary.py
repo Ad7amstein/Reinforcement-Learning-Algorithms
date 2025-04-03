@@ -13,7 +13,7 @@ state_visits = np.array([17, 17, 10, 16, 19])
 
 def update_state_value(state, values, st_return, st_visits):
     """Updates state value based on Monte Carlo Update rule"""
-    return values[state] + (1 / st_visits[state]) * (st_return - values[state])
+    return values[state] + (1.0 / st_visits[state]) * (st_return - values[state])
 
 
 def get_returns(episode_, rewards):
@@ -27,9 +27,9 @@ def get_returns(episode_, rewards):
         if step < steps - 1:
             ep_return[step] += ep_return[step + 1] * GAMMA
         state_visits[cur_state] += 1
-        state_values[cur_state] = update_state_value(
-            cur_state, state_values, ep_return[step], state_visits
-        )
+        # state_values[cur_state] = update_state_value(
+        #     cur_state, state_values, ep_return[step], state_visits
+        # )
         state_returns[cur_state] += ep_return[step]
 
     return ep_return, state_returns
@@ -40,10 +40,10 @@ def main():
     episode_returns, state_returns = get_returns(episode, state_rewards)
     print(f"Return per state: {np.round(episode_returns, 2)}")
 
-    # for state in range(0, 5):
-    #     state_values[state] = update_state_value(
-    #         state, state_values, state_returns, state_visits
-    #     )
+    for state in range(0, 5):
+        state_values[state] = update_state_value(
+            state, state_values, state_returns[state], state_visits
+        )
 
     print(f"State Values Updated: {np.round(state_values, 2)}")
 
